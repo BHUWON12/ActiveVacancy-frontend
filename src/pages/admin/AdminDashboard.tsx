@@ -74,8 +74,39 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
     }
   };
 
-  const handleDownloadCV = (cvUrl: string) => {
-    window.open(cvUrl, '_blank');
+  const handleDownloadCV = async (cvUrl: string) => {
+    try {
+      // Extract original filename from URL
+      const originalFilename = cvUrl.split('/').pop() || 'document';
+      // Ensure filename ends with .pdf
+      const filename = originalFilename.toLowerCase().endsWith('.pdf') 
+        ? originalFilename 
+        : `${originalFilename.split('.')[0]}.pdf`;
+
+      // Fetch the file
+      const response = await fetch(cvUrl);
+      const blob = await response.blob();
+      
+      // Create a download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.type = 'application/pdf';
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      showToast('CV downloaded successfully', 'success');
+    } catch (error) {
+      console.error('Error downloading CV:', error);
+      showToast('Failed to download CV', 'error');
+    }
   };
 
   const getPreviewUrl = (cvUrl: string) => {
