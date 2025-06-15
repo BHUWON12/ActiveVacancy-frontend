@@ -82,7 +82,11 @@ export default function Home() {
               >
                 <div className="flex-1 flex items-center justify-center p-4">
                   <div className="w-24 h-24 bg-gray-50 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-                    <span className="text-gray-700 font-medium group-hover:text-primary-600 transition-colors duration-300">{company.name}</span>
+                    <img
+                      src={company.logo}
+                      alt={`${company.name} logo`}
+                      className="max-w-[80%] max-h-[80%] object-contain filter grayscale transition-all duration-300 group-hover:grayscale-0"
+                    />
                   </div>
                 </div>
               </div>
