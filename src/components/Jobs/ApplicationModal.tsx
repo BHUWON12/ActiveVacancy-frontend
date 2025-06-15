@@ -217,7 +217,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
                 Resume/CV *
               </label>
               <div
-                className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+                className={`border-2 border-dashed rounded-lg p-4 sm:p-6 text-center transition-colors ${
                   dragActive
                     ? 'border-primary-500 bg-primary-50'
                     : 'border-gray-300 hover:border-primary-400'
@@ -227,11 +227,11 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
               >
-                <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                <p className="text-sm text-gray-600 mb-2">
+                <Upload className="mx-auto h-6 w-6 sm:h-8 sm:w-8 text-gray-400 mb-2" />
+                <p className="text-sm text-gray-600 mb-1 sm:mb-2">
                   {cvFile ? cvFile.name : 'Drag and drop your CV here, or click to browse'}
                 </p>
-                <p className="text-xs text-gray-500 mb-3">PDF files only, max 5MB</p>
+                <p className="text-xs text-gray-500 mb-2 sm:mb-3">PDF files only, max 5MB</p>
                 <input
                   type="file"
                   accept=".pdf"
@@ -241,7 +241,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
                 />
                 <label
                   htmlFor="cv-upload"
-                  className="btn-outline cursor-pointer inline-block"
+                  className="btn-outline cursor-pointer inline-block text-sm px-3 py-1.5 sm:px-4 sm:py-2"
                 >
                   Choose File
                 </label>

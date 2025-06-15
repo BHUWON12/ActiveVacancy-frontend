@@ -85,7 +85,7 @@ export default function Home() {
                     <img
                       src={company.logo}
                       alt={`${company.name} logo`}
-                      className="max-w-[80%] max-h-[80%] object-contain filter grayscale transition-all duration-300 group-hover:grayscale-0"
+                      className="max-w-[80%] max-h-[80%] object-contain"
                     />
                   </div>
                 </div>
