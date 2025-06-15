@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://192.168.1.7:8001/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://poised-meggi-anexdev3-d634161f.koyeb.app/api';
 
 // Create axios instance with default config
 const api = axios.create({
