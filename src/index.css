@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary-500 hover:bg-secondary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-outline {
+    @apply border border-gray-300 hover:border-primary-500 hover:text-primary-500 text-gray-700 font-medium py-2 px-4 rounded-lg transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+}
+
+/* AdSense Responsive Styles */
+.adsbygoogle {
+  display: block;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.adsense-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.adsense-container.responsive {
+  min-height: 100px;
+}
+
+.adsense-wrapper {
+  width: 100%;
+  max-width: 728px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .adsbygoogle {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    margin: 10px 0;
+    padding: 0 10px;
+  }
+
+  .adsense-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    padding: 0 10px;
+  }
+
+  .adsense-container.responsive {
+    min-height: 50px;
+  }
+
+  .adsense-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0;
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

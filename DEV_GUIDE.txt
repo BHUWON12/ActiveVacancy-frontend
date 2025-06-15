@@ -1,0 +1,343 @@
+# activevacancy Development Guide
+
+## 🚀 Deployment Instructions
+
+### Frontend Deployment
+
+#### Option 1: Netlify (Recommended)
+1. Push code to GitHub repository
+2. Connect GitHub repo to Netlify:
+   - Go to https://netlify.com
+   - Click "New site from Git"
+   - Select your repository
+   - Build settings:
+     - Build command: `npm run build`
+     - Publish directory: `dist`
+3. Set environment variables in Netlify dashboard:
+   - VITE_ADSENSE_CLIENT_ID=ca-pub-XXXXXXXXXXXXXXXXX
+   - VITE_API_BASE_URL=https://your-backend-url.com/api
+4. Deploy automatically on git push
+
+#### Option 2: Vercel
+1. Install Vercel CLI: `npm install -g vercel`
+2. Run: `vercel --prod`
+3. Follow prompts to connect GitHub
+4. Set environment variables in Vercel dashboard
+
+### Backend Deployment (FastAPI + MongoDB)
+
+#### Option 1: Railway
+1. Create account at railway.app
+2. Create new project from GitHub
+3. Add MongoDB plugin
+4. Set environment variables:
+   - MONGODB_URI (auto-provided by Railway)
+   - JWT_SECRET_KEY=your-secret-key
+   - ADMIN_USERNAME=admin
+   - ADMIN_PASSWORD=secure-password
+   - CLOUDINARY_CLOUD_NAME=your-cloud-name
+   - CLOUDINARY_API_KEY=your-api-key
+   - CLOUDINARY_API_SECRET=your-api-secret
+
+#### Option 2: Render
+1. Create account at render.com
+2. Create new Web Service from GitHub
+3. Build command: `pip install -r requirements.txt`
+4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Add MongoDB Atlas database separately
+
+#### Option 3: VPS (DigitalOcean/Linode)
+1. Create VPS instance
+2. Install Docker and Docker Compose
+3. Use provided docker-compose.yml
+4. Run: `docker-compose up -d`
+
+## 📢 Google AdSense Integration
+
+### Initial Setup (Before Approval)
+Current code has placeholder AdSense implementation:
+
+```html
+<!-- In index.html -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX"></script>
+```
+
+```jsx
+// In AdSenseAd.tsx
+data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+data-ad-slot="your-ad-slot-id"
+```
+
+### After AdSense Approval
+1. **Get your AdSense Client ID**:
+   - Login to Google AdSense
+   - Go to "Get code" section
+   - Copy your ca-pub-XXXXXXX ID
+
+2. **Create Ad Units**:
+   - Create these ad units in AdSense:
+     - "Home Page Banner" (728x90 or responsive)
+     - "Jobs Listing" (300x250 or responsive)  
+     - "Footer Banner" (728x90 or responsive)
+
+3. **Update Code**:
+   ```bash
+   # Replace in index.html
+   ca-pub-XXXXXXXXXXXXXXXXX → ca-pub-YOUR-ACTUAL-ID
+   
+   # Replace in src/components/AdSense/AdSenseAd.tsx
+   data-ad-client="ca-pub-YOUR-ACTUAL-ID"
+   
+   # Add slot IDs for each ad placement:
+   - home-page-center → actual-slot-id-1
+   - jobs-listing-1 → actual-slot-id-2
+   - footer-banner → actual-slot-id-3
+   ```
+
+4. **Environment Variables**:
+   ```env
+   VITE_ADSENSE_CLIENT_ID=ca-pub-YOUR-ACTUAL-ID
+   VITE_ADSENSE_HOME_SLOT=1234567890
+   VITE_ADSENSE_JOBS_SLOT=1234567891
+   VITE_ADSENSE_FOOTER_SLOT=1234567892
+   ```
+
+### Ad Placement Locations
+- **Home Page**: Center section between features and CTA
+- **Jobs Page**: Between every 3rd job listing
+- **Footer**: Bottom banner on all pages
+- **Sidebar**: Can be added to job detail pages
+
+### Testing AdSense
+- Use Google AdSense testing tools
+- Test on staging environment first
+- Monitor ad performance in AdSense dashboard
+
+## 🗃️ CDN Configuration for CV Uploads
+
+### Option 1: Cloudinary (Recommended)
+1. Create account at cloudinary.com
+2. Get API credentials from dashboard
+3. Set environment variables:
+   ```env
+   CLOUDINARY_CLOUD_NAME=your-cloud-name
+   CLOUDINARY_API_KEY=your-api-key
+   CLOUDINARY_API_SECRET=your-api-secret
+   ```
+
+4. Backend integration:
+   ```python
+   import cloudinary
+   import cloudinary.uploader
+   
+   cloudinary.config(
+       cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+       api_key=os.getenv("CLOUDINARY_API_KEY"),
+       api_secret=os.getenv("CLOUDINARY_API_SECRET")
+   )
+   ```
+
+### Option 2: AWS S3
+1. Create AWS account and S3 bucket
+2. Create IAM user with S3 permissions
+3. Set environment variables:
+   ```env
+   AWS_ACCESS_KEY_ID=your-access-key
+   AWS_SECRET_ACCESS_KEY=your-secret-key
+   AWS_S3_BUCKET=your-bucket-name
+   AWS_REGION=us-east-1
+   ```
+
+### Option 3: BunnyCDN
+1. Create account at bunny.net
+2. Create storage zone
+3. Set environment variables:
+   ```env
+   BUNNY_STORAGE_ZONE=your-zone-name
+   BUNNY_ACCESS_KEY=your-access-key
+   BUNNY_HOSTNAME=your-zone.b-cdn.net
+   ```
+
+## 🏢 Featured Companies Management
+
+### Updating Company Logos
+1. **Edit Mock Data**:
+   ```typescript
+   // src/data/mockData.ts
+   export const mockCompanies: Company[] = [
+     {
+       id: '1',
+       name: 'Your Company',
+       logo: 'https://your-cdn.com/logo.png',
+       featured: true,
+     },
+     // Add more companies...
+   ];
+   ```
+
+2. **Dynamic Management** (with backend):
+   - Create admin interface for company management
+   - Upload logos to CDN
+   - Store company data in database
+   - API endpoints:
+     - GET /api/companies
+     - POST /api/admin/companies
+     - PUT /api/admin/companies/:id
+     - DELETE /api/admin/companies/:id
+
+### Logo Requirements
+- **Format**: PNG, JPG, SVG
+- **Size**: 200x200px (square)
+- **Background**: Transparent or white
+- **Quality**: High resolution for retina displays
+
+## 📊 Excel Export Implementation
+
+### Frontend (Already Implemented)
+```typescript
+const handleExportExcel = async () => {
+  const response = await fetch('/api/admin/export', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'applications.xlsx';
+  a.click();
+};
+```
+
+### Backend Implementation (FastAPI)
+```python
+from openpyxl import Workbook
+from io import BytesIO
+
+@app.get("/api/admin/export")
+async def export_applications():
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Applications"
+    
+    # Headers
+    headers = ["Name", "Email", "Location", "Job Title", "Applied Date", "Status"]
+    ws.append(headers)
+    
+    # Data
+    applications = await get_all_applications()
+    for app in applications:
+        ws.append([
+            app.applicant_name,
+            app.applicant_email,
+            app.applicant_location,
+            app.job_title,
+            app.applied_date.strftime("%Y-%m-%d"),
+            app.status
+        ])
+    
+    # Save to BytesIO
+    excel_file = BytesIO()
+    wb.save(excel_file)
+    excel_file.seek(0)
+    
+    return StreamingResponse(
+        BytesIO(excel_file.read()),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment; filename=applications.xlsx"}
+    )
+```
+
+## 🔧 Development Tips
+
+### Adding New Job Fields
+1. Update TypeScript types in `src/types/index.ts`
+2. Update mock data in `src/data/mockData.ts`
+3. Update JobCard component to display new fields
+4. Update application form if needed
+
+### Customizing Design
+1. **Colors**: Edit `tailwind.config.js`
+2. **Fonts**: Update Google Fonts link in `index.html`
+3. **Components**: Modify CSS classes in `src/index.css`
+
+### Performance Optimization
+1. **Images**: Use WebP format, lazy loading
+2. **Code Splitting**: Implement React.lazy for admin routes
+3. **Caching**: Add service worker for offline support
+4. **CDN**: Serve static assets from CDN
+
+### SEO Improvements
+1. **Meta Tags**: Update for each page
+2. **Structured Data**: Add JSON-LD for job postings
+3. **Sitemap**: Generate XML sitemap
+4. **Robots.txt**: Configure for search engines
+
+## 🐛 Common Issues & Solutions
+
+### AdSense Not Showing
+- Check browser ad blockers
+- Verify client ID is correct
+- Ensure site is approved by AdSense
+- Check browser console for errors
+
+### File Upload Issues
+- Check file size limits
+- Verify CDN credentials
+- Test with different file types
+- Monitor network requests
+
+### Admin Login Issues
+- Check credentials in environment variables
+- Verify JWT token handling
+- Test in incognito mode
+- Check browser local storage
+
+### Mobile Responsiveness
+- Test on real devices
+- Use browser dev tools
+- Check touch interactions
+- Verify font sizes
+
+## 📈 Analytics & Monitoring
+
+### Google Analytics Setup
+1. Create GA4 property
+2. Add tracking code to index.html
+3. Set up conversion goals
+4. Monitor user behavior
+
+### Error Monitoring
+1. **Sentry**: For error tracking
+2. **LogRocket**: For session replay
+3. **Hotjar**: For user behavior
+
+### Performance Monitoring
+1. **Lighthouse**: Regular audits
+2. **Web Vitals**: Core metrics
+3. **GTmetrix**: Speed testing
+
+## 🔄 Maintenance
+
+### Regular Updates
+- Update dependencies monthly
+- Security patches immediately
+- Monitor for breaking changes
+- Test after updates
+
+### Backup Strategy
+- Database: Daily automated backups
+- Files: CDN redundancy
+- Code: Git repository
+- Environment: Document all configs
+
+### Monitoring Checklist
+- [ ] Site uptime
+- [ ] API response times
+- [ ] Error rates
+- [ ] AdSense revenue
+- [ ] User engagement
+- [ ] Security alerts
+
+---
+
+For additional support, contact the development team or refer to the main README.md file.
