@@ -5,6 +5,7 @@ import { useApp } from '../../context/AppContext';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { authService } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
 
 interface LoginFormData {
   email: string;
@@ -15,6 +16,7 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const { state, dispatch } = useApp();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   
   const {
     register,
@@ -46,12 +48,11 @@ export default function AdminLogin() {
     try {
       const user = await authService.login(data.email, data.password);
       dispatch({ type: 'SET_ADMIN_STATUS', payload: true });
+      showToast('Login successful!', 'success');
       navigate('/admin');
     } catch (error: any) {
-      setError('root', {
-        type: 'manual',
-        message: error.response?.data?.detail || 'Login failed. Please try again.'
-      });
+      console.error('Login error:', error);
+      showToast(error.response?.data?.detail || 'Invalid email or password', 'error');
     }
   };
 
@@ -81,6 +82,7 @@ export default function AdminLogin() {
                 <input
                   id="email"
                   type="email"
+                  autoComplete="off"
                   {...register('email', { 
                     required: 'Email is required',
                     pattern: {
@@ -106,6 +108,7 @@ export default function AdminLogin() {
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
                   {...register('password', { required: 'Password is required' })}
                   className="input-field pl-10 pr-10"
                   placeholder="Enter your password"

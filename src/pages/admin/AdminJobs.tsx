@@ -3,6 +3,7 @@ import { Briefcase, Plus, Search, Edit2, Trash2, MapPin, DollarSign, Clock, Star
 import { jobsService } from '../../services/api';
 import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { Job } from '../../types';
+import { useToast } from '../../context/ToastContext';
 
 interface AdminJobsProps {
   onCountChange: (count: number) => void;
@@ -25,6 +26,7 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
     requirements: [] as string[],
     featured: false
   });
+  const { showToast } = useToast();
 
   useEffect(() => {
     fetchJobs();
@@ -54,10 +56,12 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
       } else {
         console.error('Invalid data format received:', response);
         setError('Invalid data format received from server');
+        showToast('Failed to load jobs', 'error');
       }
     } catch (err: any) {
       console.error('Error fetching jobs:', err);
       setError(err.response?.data?.detail || 'Failed to fetch jobs');
+      showToast('Failed to load jobs', 'error');
     } finally {
       setLoading(false);
     }
@@ -73,8 +77,10 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
       
       if (selectedJob) {
         await jobsService.update(selectedJob.id, dataToSubmit);
+        showToast('Job updated successfully', 'success');
       } else {
         await jobsService.create(dataToSubmit);
+        showToast('Job created successfully', 'success');
       }
       setShowJobModal(false);
       setSelectedJob(null);
@@ -91,6 +97,7 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
     } catch (error) {
       console.error('Error saving job:', error);
       setError('Failed to save job');
+      showToast('Failed to save job', 'error');
     }
   };
 
@@ -113,10 +120,12 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
     try {
       await jobsService.delete(jobToDelete.id);
       setJobToDelete(null);
+      showToast('Job deleted successfully', 'success');
       fetchJobs();
     } catch (error) {
       console.error('Error deleting job:', error);
       setError('Failed to delete job');
+      showToast('Failed to delete job', 'error');
     }
   };
 
@@ -481,18 +490,7 @@ export default function AdminJobs({ onCountChange }: AdminJobsProps) {
                   <button
                     type="button"
                     className="w-full sm:w-auto px-6 py-2.5 bg-red-600 rounded-xl text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200 flex items-center justify-center"
-                    onClick={async () => {
-                      try {
-                        await jobsService.delete(jobToDelete.id);
-                        setJobToDelete(null);
-                        const updatedJobs = jobs.filter(job => job.id !== jobToDelete.id);
-                        setJobs(updatedJobs);
-                        onCountChange(updatedJobs.length);
-                      } catch (error) {
-                        console.error('Error deleting job:', error);
-                        setError('Failed to delete job');
-                      }
-                    }}
+                    onClick={handleDelete}
                   >
                     <Trash2 className="h-4 w-4 mr-2" />
                     Delete Job

@@ -6,6 +6,7 @@ import LoadingSpinner from '../../components/UI/LoadingSpinner';
 import { applicationsService } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import ExcelJS from 'exceljs';
+import { useToast } from '../../context/ToastContext';
 
 interface AdminDashboardProps {
   onCountChange: (count: number) => void;
@@ -29,6 +30,7 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
     endDate: ''
   });
   const [showCvPreview, setShowCvPreview] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     fetchApplications();
@@ -61,10 +63,12 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
       } else {
         console.error('Invalid data format received:', response);
         setError('Invalid data format received from server');
+        showToast('Failed to load applications', 'error');
       }
     } catch (err: any) {
       console.error('Error fetching applications:', err);
       setError(err.response?.data?.detail || 'Failed to fetch applications');
+      showToast('Failed to load applications', 'error');
     } finally {
       setLoading(false);
     }
@@ -160,10 +164,12 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
       a.click();
       window.URL.revokeObjectURL(url);
       
+      showToast('Applications exported successfully', 'success');
       setShowExportModal(false);
     } catch (error) {
       console.error('Error exporting to Excel:', error);
       setError('Failed to export applications to Excel');
+      showToast('Failed to export applications', 'error');
     }
   };
 
@@ -440,9 +446,11 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
                         const updatedApplications = applications.filter(app => app.id !== applicationToDelete.id);
                         setApplications(updatedApplications);
                         onCountChange(updatedApplications.length);
+                        showToast('Application deleted successfully', 'success');
                       } catch (error) {
                         console.error('Error deleting application:', error);
                         setError('Failed to delete application');
+                        showToast('Failed to delete application', 'error');
                       }
                     }}
                   >

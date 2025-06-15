@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
+import { ToastProvider } from './context/ToastContext';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
@@ -90,9 +91,11 @@ export default function App() {
   return (
     <ErrorBoundary>
       <AppProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <ToastProvider>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </ToastProvider>
       </AppProvider>
     </ErrorBoundary>
   );

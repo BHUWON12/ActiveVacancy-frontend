@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { X, Upload, CheckCircle, Phone } from 'lucide-react';
 import { Job, ApplicationFormData } from '../../types';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import { useToast } from '../../context/ToastContext';
 
 interface ApplicationModalProps {
   job: Job;
@@ -15,6 +16,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const { showToast } = useToast();
   
   const {
     register,
@@ -32,6 +34,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
   const handleFormSubmit = async (data: ApplicationFormData) => {
     if (!job.id) {
       console.error('Job ID is missing:', job);
+      showToast('Error: Job ID is missing', 'error');
       return;
     }
 
@@ -44,6 +47,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
         cv: data.cv || null
       });
       setIsSubmitted(true);
+      showToast('Application submitted successfully!', 'success');
       setTimeout(() => {
         onClose();
         reset();
@@ -51,6 +55,7 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
       }, 2000);
     } catch (error) {
       console.error('Application submission error:', error);
+      showToast('Failed to submit application. Please try again.', 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -74,14 +79,27 @@ export default function ApplicationModal({ job, isOpen, onClose, onSubmit }: App
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+          showToast('File size exceeds 5MB limit', 'error');
+          return;
+        }
         setValue('cv', file);
+        showToast('File uploaded successfully', 'success');
+      } else {
+        showToast('Please upload a PDF file', 'error');
       }
     }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setValue('cv', e.target.files[0]);
+      const file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        showToast('File size exceeds 5MB limit', 'error');
+        return;
+      }
+      setValue('cv', file);
+      showToast('File uploaded successfully', 'success');
     }
   };
 
