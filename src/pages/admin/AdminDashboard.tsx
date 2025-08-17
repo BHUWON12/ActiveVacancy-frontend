@@ -166,8 +166,7 @@ export default function AdminDashboard({ onCountChange }: AdminDashboardProps) {
         { header: 'Phone', key: 'phone', width: 15 },
         { header: 'Location', key: 'location', width: 20 },
         { header: 'Job Title', key: 'jobTitle', width: 30 },
-        { header: 'Applied Date', key: 'appliedDate', width: 15 },
-        { header: 'CV URL', key: 'cvUrl', width: 50 }
+        { header: 'Applied Date', key: 'appliedDate', width: 15 }
       ];
 
       // Add rows
