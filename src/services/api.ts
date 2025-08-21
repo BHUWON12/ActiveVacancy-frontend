@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://poised-meggi-anexdev3-d634161f.koyeb.app/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001/api';
 
 // Create axios instance with default config
 const api = axios.create({
@@ -152,6 +152,57 @@ export const jobsService = {
 
   delete: async (id: string) => {
     const response = await api.delete(`/jobs/${id}`);
+    return response.data.data;
+  },
+};
+
+// Visa Jobs Service
+export const visaJobsService = {
+  getAll: async () => {
+    const response = await api.get('/visa-jobs');
+    return response.data;
+  },
+
+  getById: async (id: string) => {
+    const response = await api.get(`/visa-jobs/${id}`);
+    return response.data.data;
+  },
+
+  create: async (jobData: any) => {
+    const response = await api.post('/visa-jobs', jobData);
+    return response.data.data;
+  },
+
+  update: async (id: string, jobData: any) => {
+    const response = await api.put(`/visa-jobs/${id}`, jobData);
+    return response.data.data;
+  },
+
+  delete: async (id: string) => {
+    const response = await api.delete(`/visa-jobs/${id}`);
+    return response.data.data;
+  },
+};
+
+// Visa Job Applications Service
+export const visaJobApplicationsService = {
+  getAll: async () => {
+    const response = await api.get('/visa-job-applications');
+    return response.data;
+  },
+
+  create: async (applicationData: any) => {
+    const response = await api.post('/visa-job-applications', applicationData);
+    return response.data;
+  },
+
+  updateStatus: async (id: string, status: string) => {
+    const response = await api.patch(`/visa-job-applications/${id}/status`, { status });
+    return response.data.data;
+  },
+
+  delete: async (id: string) => {
+    const response = await api.delete(`/visa-job-applications/${id}`);
     return response.data.data;
   },
 };

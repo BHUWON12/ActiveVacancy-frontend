@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { ClipboardList, Briefcase, LogOut, Users, FileText } from 'lucide-react';
+import { ClipboardList, Briefcase, LogOut, Users, FileText, Globe } from 'lucide-react';
 import AdminDashboard from '../../pages/admin/AdminDashboard';
 import AdminJobs from '../../pages/admin/AdminJobs';
+import AdminVisaJobs from '../../pages/admin/AdminVisaJobs';
+import AdminVisaJobApplications from '../../pages/admin/AdminVisaJobApplications';
 import { useApp } from '../../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../context/ToastContext';
 
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState<'applications' | 'jobs'>('applications');
+  const [activeTab, setActiveTab] = useState<'applications' | 'jobs' | 'visajobs' | 'visajobapplications'>('applications');
   const [applicationCount, setApplicationCount] = useState(0);
   const [jobCount, setJobCount] = useState(0);
+  const [visaJobCount, setVisaJobCount] = useState(0);
+  const [visaJobApplicationCount, setVisaJobApplicationCount] = useState(0);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { dispatch } = useApp();
   const navigate = useNavigate();
@@ -75,16 +79,37 @@ export default function AdminPanel() {
               <Briefcase className="h-5 w-5 mr-2" />
               Jobs {jobCount}
             </button>
+            <button
+              onClick={() => setActiveTab('visajobs')}
+              className={`inline-flex items-center px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'visajobs'
+                  ? 'bg-primary-50 text-primary-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <Globe className="h-5 w-5 mr-2" />
+              Visa Jobs {visaJobCount}
+            </button>
+            <button
+              onClick={() => setActiveTab('visajobapplications')}
+              className={`inline-flex items-center px-6 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                activeTab === 'visajobapplications'
+                  ? 'bg-primary-50 text-primary-700'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <FileText className="h-5 w-5 mr-2" />
+              Visa+Job Applications {visaJobApplicationCount}
+            </button>
           </div>
         </div>
 
         {/* Tab Content */}
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {activeTab === 'applications' ? (
-            <AdminDashboard onCountChange={setApplicationCount} />
-          ) : (
-            <AdminJobs onCountChange={setJobCount} />
-          )}
+          {activeTab === 'applications' && <AdminDashboard onCountChange={setApplicationCount} />}
+          {activeTab === 'jobs' && <AdminJobs onCountChange={setJobCount} />}
+          {activeTab === 'visajobs' && <AdminVisaJobs onCountChange={setVisaJobCount} />}
+          {activeTab === 'visajobapplications' && <AdminVisaJobApplications onCountChange={setVisaJobApplicationCount} />}
         </div>
       </main>
 

@@ -6,6 +6,7 @@ import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
+import VisaJobs from './pages/VisaJobs'; // ✅ NEW
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -35,7 +36,9 @@ class ErrorBoundary extends React.Component<
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold text-red-600 mb-4">Something went wrong</h1>
+            <h1 className="text-2xl font-bold text-red-600 mb-4">
+              Something went wrong
+            </h1>
             <p className="text-gray-600 mb-4">{this.state.error?.message}</p>
             <button
               onClick={() => window.location.reload()}
@@ -67,6 +70,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Jobs />} />
+            <Route path="/visajobs" element={<VisaJobs />} /> {/* ✅ NEW */}
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -99,4 +103,4 @@ export default function App() {
       </AppProvider>
     </ErrorBoundary>
   );
-} 
+}

@@ -52,3 +52,19 @@ export interface ApiResponse<T> {
   message?: string;
   error?: string;
 }
+
+export interface VisaJobApplication {
+  id: string;
+  visa_job_id: string;
+  full_name: string;
+  passport_number: string;
+  contact_number: string;
+  email: string;
+  desired_country: string;
+  job_role: string;
+  expected_salary: string;
+  education_qualification: string;
+  years_of_experience: string;
+  applied_date: string;
+  status: string;
+}

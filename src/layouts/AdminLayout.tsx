@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, Link } from 'react-router-dom';
 import { LogOut, Menu } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -43,14 +43,24 @@ export default function AdminLayout() {
         <h2 className="text-2xl font-bold text-primary-600 mb-4">Menu</h2>
         <ul>
           <li className="mb-2">
-            <a href="/admin/dashboard" className="block px-2 py-1 rounded hover:bg-gray-200">
+            <Link to="/admin/dashboard" className="block px-2 py-1 rounded hover:bg-gray-200">
               Dashboard
-            </a>
+            </Link>
           </li>
           <li className="mb-2">
-            <a href="/admin/jobs" className="block px-2 py-1 rounded hover:bg-gray-200">
+            <Link to="/admin/jobs" className="block px-2 py-1 rounded hover:bg-gray-200">
               Jobs
-            </a>
+            </Link>
+          </li>
+          <li className="mb-2 ml-4"> {/* Indent sub-item */}
+            <Link to="/admin/visa-jobs" className="block px-2 py-1 rounded hover:bg-gray-200 text-sm">
+              Visa Jobs
+            </Link>
+          </li>
+          <li className="mb-2 ml-4"> {/* Indent sub-item */}
+            <Link to="/admin/visa-job-applications" className="block px-2 py-1 rounded hover:bg-gray-200 text-sm">
+              Visa Job Applications
+            </Link>
           </li>
         </ul>
       </aside>
@@ -58,7 +68,7 @@ export default function AdminLayout() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <nav className="bg-white shadow-sm border-b px-4 py-3 flex justify-between items-center md:ml-64">
+        <nav className="bg-white shadow-sm border-b px-3 py-2 sm:px-4 sm:py-3 flex justify-between items-center md:ml-64">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -67,7 +77,7 @@ export default function AdminLayout() {
             <Menu className="h-5 w-5" />
           </button>
 
-          <h1 className="text-xl font-bold text-primary-600">Admin Panel</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-primary-600">Admin Panel</h1>
 
           <button
             onClick={handleLogout}
@@ -79,7 +89,7 @@ export default function AdminLayout() {
         </nav>
 
         {/* Page Content */}
-        <main className="p-4 md:p-6">
+        <main className="p-3 sm:p-4 md:p-6">
           <Outlet />
         </main>
       </div>
