@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Users, Shield, Globe, AlertTriangle, CheckCircle, Scale, Phone, Mail, Clock, CreditCard, MapPin } from 'lucide-react';
+import { FileText, Users, Shield, Globe, AlertTriangle, CheckCircle, Scale, Phone, Clock, CreditCard, MapPin } from 'lucide-react';
 
 const Terms: React.FC = () => {
   const [activeSection, setActiveSection] = useState('acceptance');
@@ -27,10 +27,9 @@ const Terms: React.FC = () => {
   };
 
   return (
-  <>
-
-  {/* Hero Section */}
-  <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <>
+      {/* Hero Section */}
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100">
         <div className="bg-gradient-to-r from-blue-100 via-white to-blue-200 py-16">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center">
@@ -149,6 +148,7 @@ const Terms: React.FC = () => {
                   </h2>
                   
                   <div className="grid md:grid-cols-2 gap-6">
+
                     <div className="space-y-4">
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h4 className="font-bold text-gray-800 mb-2">"Services"</h4>
@@ -460,7 +460,6 @@ const Terms: React.FC = () => {
                     <CreditCard className="w-8 h-8 text-blue-600" />
                     6. Service Fees & Payment Terms
                   </h2>
-                  
                   <div className="space-y-6">
                     <div className="bg-green-50 p-6 rounded-lg">
                       <h3 className="font-bold text-green-800 mb-4">Service Fee Structure</h3>
@@ -470,23 +469,18 @@ const Terms: React.FC = () => {
                           <div className="space-y-2">
                             <div className="flex justify-between text-green-600">
                               <span>Poland (Local Jobs)</span>
-                              <span className="font-semibold">$800 - $1,200</span>
                             </div>
                             <div className="flex justify-between text-green-600">
                               <span>UAE & Gulf Countries</span>
-                              <span className="font-semibold">$1,000 - $1,500</span>
                             </div>
                             <div className="flex justify-between text-green-600">
                               <span>Canada & Australia</span>
-                              <span className="font-semibold">$1,500 - $2,000</span>
                             </div>
                             <div className="flex justify-between text-green-600">
                               <span>UK & Europe</span>
-                              <span className="font-semibold">$1,200 - $1,800</span>
                             </div>
                             <div className="flex justify-between text-green-600">
                               <span>Other Countries</span>
-                              <span className="font-semibold">$500 - $1,500</span>
                             </div>
                           </div>
                         </div>
@@ -504,89 +498,8 @@ const Terms: React.FC = () => {
                           </ul>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="bg-blue-50 p-6 rounded-lg">
-                      <h3 className="font-bold text-blue-800 mb-4">Payment Schedule & Methods</h3>
-                      <div className="grid md:grid-cols-3 gap-4">
-                        <div className="bg-white p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-700 mb-2">Phase 1: Registration</h4>
-                          <div className="text-blue-600 text-sm space-y-1">
-                            <div>Amount: 30% of total fee</div>
-                            <div>When: Profile creation</div>
-                            <div>Purpose: Initial processing</div>
-                          </div>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-700 mb-2">Phase 2: Job Offer</h4>
-                          <div className="text-blue-600 text-sm space-y-1">
-                            <div>Amount: 50% of total fee</div>
-                            <div>When: Job offer received</div>
-                            <div>Purpose: Visa processing</div>
-                          </div>
-                        </div>
-                        <div className="bg-white p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-700 mb-2">Phase 3: Departure</h4>
-                          <div className="text-blue-600 text-sm space-y-1">
-                            <div>Amount: 20% of total fee</div>
-                            <div>When: Before travel</div>
-                            <div>Purpose: Final arrangements</div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-6">
-                        <h4 className="font-semibold text-blue-700 mb-3">Accepted Payment Methods</h4>
-                        <div className="grid md:grid-cols-4 gap-3">
-                          <div className="bg-white p-3 rounded text-center">
-                            <div className="font-semibold text-blue-600">Bank Transfer</div>
-                            <div className="text-blue-500 text-sm">Nepal & International</div>
-                          </div>
-                          <div className="bg-white p-3 rounded text-center">
-                            <div className="font-semibold text-blue-600">eSewa/Khalti</div>
-                            <div className="text-blue-500 text-sm">Digital Wallets</div>
-                          </div>
-                          <div className="bg-white p-3 rounded text-center">
-                            <div className="font-semibold text-blue-600">Credit/Debit Cards</div>
-                            <div className="text-blue-500 text-sm">Visa/Mastercard</div>
-                          </div>
-                          <div className="bg-white p-3 rounded text-center">
-                            <div className="font-semibold text-blue-600">Cash Payment</div>
-                            <div className="text-blue-500 text-sm">Office Locations</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-lg">
-                      <h3 className="font-bold text-yellow-800 mb-4">Refund Policy</h3>
-                      <div className="space-y-4">
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div>
-                            <h4 className="font-semibold text-yellow-700 mb-2">Eligible for Refund</h4>
-                            <ul className="text-yellow-600 space-y-1">
-                              <li>• Company unable to provide job offer within 6 months</li>
-                              <li>• Visa rejection due to ActiveVacancy's error</li>
-                              <li>• Service cancellation within 7 days of registration</li>
-                              <li>• Medical unfitness discovered after payment</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-yellow-700 mb-2">Non-Refundable</h4>
-                            <ul className="text-yellow-600 space-y-1">
-                              <li>• Candidate's change of mind</li>
-                              <li>• Document fraud or false information</li>
-                              <li>• Visa rejection due to candidate issues</li>
-                              <li>• Job rejection by candidate after offer</li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="bg-yellow-100 p-4 rounded">
-                          <p className="text-yellow-800 text-sm">
-                            <strong>Refund Processing:</strong> Approved refunds will be processed within 15-30 business days. 
-                            Processing fees (10% of total amount) will be deducted from refunds.
-                          </p>
-                        </div>
+                      <div className="mt-6 text-green-700 text-sm">
+                        <strong>Important Note:</strong> ActiveVacancy does not handle any payments or financial transactions. All service fees, payments, refund policies, legal matters, documentation, and processes are handled exclusively by the respective consultancies. ActiveVacancy acts solely as a platform connecting job seekers with verified consultancies.
                       </div>
                     </div>
                   </div>
@@ -598,55 +511,7 @@ const Terms: React.FC = () => {
                     <MapPin className="w-8 h-8 text-blue-600" />
                     7. Job Placement Process & Timeline
                   </h2>
-                  
                   <div className="space-y-6">
-                    <div className="bg-blue-50 p-6 rounded-lg">
-                      <h3 className="font-bold text-blue-800 mb-4">Step-by-Step Process</h3>
-                      <div className="grid md:grid-cols-6 gap-4">
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">1</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Registration</h4>
-                          <p className="text-blue-600 text-xs">Profile creation & document submission</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">2</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Verification</h4>
-                          <p className="text-blue-600 text-xs">Document authentication & skills assessment</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">3</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Matching</h4>
-                          <p className="text-blue-600 text-xs">Job opportunities identification</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">4</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Interview</h4>
-                          <p className="text-blue-600 text-xs">Employer screening & selection</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">5</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Visa Processing</h4>
-                          <p className="text-blue-600 text-xs">Work permit & visa application</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <span className="font-bold text-blue-800">6</span>
-                          </div>
-                          <h4 className="font-semibold text-blue-700 text-sm mb-1">Departure</h4>
-                          <p className="text-blue-600 text-xs">Travel arrangements & support</p>
-                        </div>
-                      </div>
-                    </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="bg-green-50 p-6 rounded-lg">
@@ -982,6 +847,7 @@ const Terms: React.FC = () => {
                 </section>
 
                 {/* Application Process Section (No Account Creation) */}
+                                {/* Application Process Section (No Account Creation) */}
                 <section id="application-process" className="p-8 border-b">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
                       <Clock className="w-8 h-8 text-blue-600" />
@@ -990,15 +856,21 @@ const Terms: React.FC = () => {
                     <div className="space-y-6">
                       <div className="bg-blue-50 p-6 rounded-lg">
                         <h3 className="font-bold text-blue-800 mb-4">How It Works</h3>
-                        <ul className="text-blue-700 space-y-2">
-                          <li>• Browse job and visa+job opportunities listed on ActiveVacancy</li>
-                          <li>• Fill out the required details in the application form</li>
-                          <li>• Your information is securely forwarded to the relevant consultancies</li>
-                          <li>• Consultancies will contact you directly for further process</li>
-                        </ul>
-                        <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg mt-6">
-                          <strong className="text-green-800">Note:</strong>
-                          <span className="text-green-700"> ActiveVacancy does not charge job seekers directly. All service fees are charged to consultancies, not to applicants. There is no account creation process; we only list jobs and visa+job opportunities, and forward interested applicants' details to consultancies.</span>
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <ul className="text-blue-700 space-y-2">
+                            <li>1. Browse Available Jobs</li>
+                            <li>2. Click Apply Now</li>
+                            <li>3. Fill Application Form</li>
+                            <li>4. Submit Documents</li>
+                            <li>5. Await Consultancy Contact</li>
+                          </ul>
+                          <ul className="text-blue-700 space-y-2">
+                            <li>6. Initial Assessment</li>
+                            <li>7. Process Payment</li>
+                            <li>8. Documentation & Visas</li>
+                            <li>9. Travel Arrangements</li>
+                            <li>10. Arrival Support</li>
+                          </ul>
                         </div>
                       </div>
                       <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-lg">
@@ -1009,12 +881,13 @@ const Terms: React.FC = () => {
                       </div>
                     </div>
                 </section>
-                </div> {/* End .bg-white .rounded-lg .shadow-lg (Main Content) */}
-              </div> {/* End .lg:w-3/4 */}
-            </div> {/* End .flex .lg:flex-row */}
-          </div> {/* End .max-w-7xl .mx-auto .px-4 .py-12 */}
-        </div> {/* End .min-h-screen .bg-gradient-to-br */}
-      </>
+              </div> {/* End .bg-white .rounded-lg .shadow-lg (Main Content) */}
+            </div> {/* End .lg:w-3/4 */}
+          </div> {/* End .flex .lg:flex-row */}
+        </div> {/* End .max-w-7xl .mx-auto .px-4 .py-12 */}
+      </div> {/* End .min-h-screen .bg-gradient-to-br */}
+    </>
   );
-}
+};
+
 export default Terms;
