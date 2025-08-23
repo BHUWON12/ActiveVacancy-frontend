@@ -6,13 +6,17 @@ import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
 import Jobs from './pages/Jobs';
-import VisaJobs from './pages/VisaJobs'; // ✅ NEW
+import VisaJobs from './pages/VisaJobs';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminPanel from './components/Admin/AdminPanel';
 import AdminAuthGuard from './components/Auth/AdminAuthGuard';
+import Terms from './pages/Terms';
+import FAQ from './pages/FAQ';
+import Testimonials from './pages/Testimonials';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -70,9 +74,13 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/jobs" element={<Jobs />} />
-            <Route path="/visajobs" element={<VisaJobs />} /> {/* ✅ NEW */}
+            <Route path="/visajobs" element={<VisaJobs />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin/*"

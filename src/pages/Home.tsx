@@ -168,8 +168,8 @@ export default function Home() {
             
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-black text-gray-900 leading-none">
               <span className="inline-block hover:scale-105 transition-transform duration-500">Find Your</span>
-              <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 shimmer hover:scale-105 transition-transform duration-500">
-                Dream Job
+              <span className="block mt-2 bg-clip-text bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 shimmer hover:scale-105 transition-transform duration-500">
+                Dream Job,
               </span>
               <span className="block mt-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-gray-600 hover:scale-105 transition-transform duration-500">
                 Build Your Future

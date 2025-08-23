@@ -47,31 +47,60 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
+          {/* Quick Links - Two Columns */}
+          <div className="md:col-span-1 col-span-1">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/jobs" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  Browse Jobs
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">
-                  Privacy Policy
-                </a>
-              </li>
-            </ul>
+            <div className="grid grid-cols-2 gap-4">
+              <ul className="space-y-3">
+                <li>
+                  <Link to="/" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/jobs" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Browse Jobs
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/visajobs" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Visa Jobs
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+              <ul className="space-y-3">
+                <li>
+                  <Link to="/faq" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    FAQ
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacyPolicy" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Terms & Conditions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/testimonials" className="text-gray-300 hover:text-white transition-colors duration-200">
+                    Testimonials
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Contact Info */}

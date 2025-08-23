@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../Navigation/Navbar';
-import Footer from '../Navigation/Footer';
+import Header from './Header';
+import Footer from './Footer';
 import AdSenseScript from '../Ads/AdSenseScript';
 import AdLayout from '../Ads/AdLayout';
 
@@ -10,7 +10,7 @@ export default function MainLayout() {
     <div className="min-h-screen flex flex-col">
       <AdSenseScript />
       
-      <Navbar />
+  <Header />
       
       <main className="flex-grow w-full">
         {/* Top Ad */}
