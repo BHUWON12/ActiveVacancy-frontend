@@ -26,6 +26,7 @@ export default function AdminVisaJobs({ onCountChange }: AdminVisaJobsProps) {
     country: '',
     visa_type: '',
     salary: '',
+    approximate_cost: '',
     contract_duration: '',
     vacancies: 0,
     processing_time: '',
@@ -107,6 +108,7 @@ export default function AdminVisaJobs({ onCountChange }: AdminVisaJobsProps) {
         country: job.country,
         visa_type: job.visa_type,
         salary: job.salary,
+        approximate_cost: job.approximate_cost,
         contract_duration: job.contract_duration,
         vacancies: job.vacancies,
         processing_time: job.processing_time,
@@ -233,6 +235,7 @@ export default function AdminVisaJobs({ onCountChange }: AdminVisaJobsProps) {
                 country: '',
                 visa_type: '',
                 salary: '',
+                approximate_cost: '',
                 contract_duration: '',
                 vacancies: 0,
                 processing_time: '',
@@ -499,6 +502,22 @@ export default function AdminVisaJobs({ onCountChange }: AdminVisaJobsProps) {
                               id="salary"
                               value={formData.salary}
                               onChange={(e) => setFormData(prev => ({ ...prev, salary: e.target.value }))}
+                              className="block w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg sm:rounded-xl border-2 border-gray-200 shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-sm sm:text-base transition-all duration-200"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label htmlFor="approximate_cost" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                            Approximate Cost
+                          </label>
+                          <div className="relative">
+                            <DollarSign className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+                            <input
+                              type="text"
+                              id="approximate_cost"
+                              value={formData.approximate_cost}
+                              onChange={(e) => setFormData(prev => ({ ...prev, approximate_cost: e.target.value }))}
                               className="block w-full h-10 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 rounded-lg sm:rounded-xl border-2 border-gray-200 shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-200 text-sm sm:text-base transition-all duration-200"
                               required
                             />

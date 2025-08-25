@@ -69,6 +69,34 @@ export default function AdminVisaJobApplications({ onCountChange }: AdminVisaJob
     }
   };
 
+  const handleDelete = async () => {
+  if (!applicationToDelete) return;
+
+  try {
+    const appId = applicationToDelete._id || applicationToDelete.id; // handle both cases
+    await visaJobApplicationsService.delete(appId);
+
+    // Remove deleted app from state instantly
+    setApplications(prevApplications =>
+      prevApplications.filter(app => (app._id || app.id) !== appId)
+    );
+
+    // Close modal
+    setApplicationToDelete(null);
+
+    // Update counter
+    onCountChange(applications.length - 1);
+
+    // Show success toast
+    showToast('Application deleted successfully', 'success');
+  } catch (error) {
+    console.error('Error deleting application:', error);
+    setError('Failed to delete application');
+    showToast('Failed to delete application', 'error');
+  }
+};
+
+
   const filteredApplications = applications.filter(app =>
     app.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     app.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -150,7 +178,10 @@ export default function AdminVisaJobApplications({ onCountChange }: AdminVisaJob
                             <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
                           </button>
                           <button
-                            onClick={() => setApplicationToDelete(application)}
+                            onClick={() => {
+                              console.log("Deleting application with ID:", application.id);
+                              setApplicationToDelete(application);
+                            }}
                             className="text-red-600 hover:text-red-900 p-1 transition-colors duration-150"
                             title="Delete"
                           >
@@ -337,20 +368,7 @@ export default function AdminVisaJobApplications({ onCountChange }: AdminVisaJob
                   <button
                     type="button"
                     className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-red-600 rounded-xl text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200 flex items-center justify-center"
-                    onClick={async () => {
-                      try {
-                        await visaJobApplicationsService.delete(applicationToDelete.id);
-                        setApplicationToDelete(null);
-                        const updatedApplications = applications.filter(app => app.id !== applicationToDelete.id);
-                        setApplications(updatedApplications);
-                        onCountChange(updatedApplications.length);
-                        showToast('Application deleted successfully', 'success');
-                      } catch (error) {
-                        console.error('Error deleting application:', error);
-                        setError('Failed to delete application');
-                        showToast('Failed to delete application', 'error');
-                      }
-                    }}
+                    onClick={handleDelete}
                   >
                     <Trash2 className="h-4 w-4 mr-2 flex-shrink-0" />
                     Delete

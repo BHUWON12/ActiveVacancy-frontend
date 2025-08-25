@@ -203,7 +203,7 @@ export const visaJobApplicationsService = {
 
   delete: async (id: string) => {
     const response = await api.delete(`/visa-job-applications/${id}`);
-    return response.data.data;
+    return response.data;
   },
 };
 

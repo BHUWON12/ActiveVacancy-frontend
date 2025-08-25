@@ -71,11 +71,12 @@ export default function VisaJobs() {
             id: job._id,
             title: job.title,
             country: job.country,
-            visaType: job.visa_type,
+            visa_type: job.visa_type,
             salary: job.salary,
-            contractDuration: job.contract_duration,
+            approximate_cost: job.approximate_cost,
+            contract_duration: job.contract_duration,
             vacancies: job.vacancies,
-            processingTime: job.processing_time,
+            processing_time: job.processing_time,
             includes: job.includes,
             description: job.description,
           }))
@@ -326,7 +327,7 @@ export default function VisaJobs() {
                         <FileText className="w-5 h-5 text-blue-500" />
                         <div>
                           <p className="text-xs text-gray-500 uppercase tracking-wide">Visa Type</p>
-                          <p className="text-sm font-medium text-gray-900">{job.visaType}</p>
+                          <p className="text-sm font-medium text-gray-900">{job.visa_type}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
@@ -340,14 +341,14 @@ export default function VisaJobs() {
                         <Clock className="w-5 h-5 text-orange-500" />
                         <div>
                           <p className="text-xs text-gray-500 uppercase tracking-wide">Processing</p>
-                          <p className="text-sm font-medium text-gray-900">{job.processingTime}</p>
+                          <p className="text-sm font-medium text-gray-900">{job.processing_time}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                         <Calendar className="w-5 h-5 text-purple-500" />
                         <div>
                           <p className="text-xs text-gray-500 uppercase tracking-wide">Contract</p>
-                          <p className="text-sm font-medium text-gray-900">{job.contractDuration}</p>
+                          <p className="text-sm font-medium text-gray-900">{job.contract_duration}</p>
                         </div>
                       </div>
                     </div>
@@ -368,7 +369,10 @@ export default function VisaJobs() {
 
                     <div className="flex items-center gap-6">
                       <div className="px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg">
-                        <span className="text-green-800 font-bold text-lg">{job.salary}</span>
+                        <span className="text-green-800 font-bold text-lg">Salary: {job.salary}</span>
+                      </div>
+                      <div className="px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg">
+                        <span className="text-blue-800 font-bold text-lg">Approx. Cost(NPR): {job.approximate_cost}</span>
                       </div>
                     </div>
                   </div>

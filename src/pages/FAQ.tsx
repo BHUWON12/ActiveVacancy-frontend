@@ -82,6 +82,7 @@ const FAQ: React.FC = () => {
         }
       ]
     },
+    
     {
       category: "Visa-Sponsored Jobs for Nepali Citizens",
       icon: <Globe className="w-5 h-5" />,

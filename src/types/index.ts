@@ -53,6 +53,21 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
+export interface VisaJob {
+  id: string;
+  title: string;
+  country: string;
+  visa_type: string;
+  salary: string;
+  approximate_cost: string;
+  contract_duration: string;
+  vacancies: number;
+  processing_time: string;
+  includes: string[];
+  description: string;
+  posted_date: string;
+}
+
 export interface VisaJobApplication {
   id: string;
   visa_job_id: string;
