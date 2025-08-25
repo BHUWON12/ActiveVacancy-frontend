@@ -221,7 +221,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 📞 Support
 
 For support and questions:
-- Email: contact@activevacancy.com
+- Email: activevacancy.root@gmail.com
 - Documentation: [Link to docs]
 - Issues: [GitHub Issues]
 

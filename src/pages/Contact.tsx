@@ -100,7 +100,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: 'Email Us',
-      info: 'contact@activevacancy.com',
+      info: 'activevacancy.root@gmail.com',
       description: 'Send us an email anytime',
     },
     {
